@@ -1,10 +1,10 @@
-package TP1.Punto6;
+package TP1;
 
-public class Main {
+public class Punto6 {
     public static void main(String[] args) {
         double[] x = new double[15];
 
-        System.out.println(accesoIndice2(x, 16));
+        System.out.println(accesoIndice2(x, 16));                 
     }
     // Asi es como viene en el tp
     public static double accesoIndice(double[] x, int pos) throws RuntimeException {
