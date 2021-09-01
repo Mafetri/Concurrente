@@ -1,4 +1,4 @@
-package TP2.Punto6Thread;
+package TP2.Punto6Runnable;
 
 public class Main {
     public static void main(String[] args){
@@ -7,13 +7,13 @@ public class Main {
 
         long initialTime = System.currentTimeMillis();
 
-        Cajero cajero1 = new Cajero("Cajero 1", initialTime, c1);
-        Cajero cajero2 = new Cajero("Cajero 2", initialTime, c2);
-
-        cajero1.start();
-        cajero2.start();
+        Thread t1 = new Thread(new Cajero("Cajero 1", initialTime, c1), "Cajero 1");
+        Thread t2 = new Thread(new Cajero("Cajero 2", initialTime, c2), "Cajero 2");
         
-        try{cajero1.join();cajero2.join();}catch(Exception e){}
+        t1.start();
+        t2.start();
+
+        try{t1.join();t2.join();}catch(Exception e){}
 
         System.out.println("Tiempo final: " + ((System.currentTimeMillis() - initialTime)) + "ms.");
     }
