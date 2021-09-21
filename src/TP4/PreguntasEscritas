@@ -1,0 +1,26 @@
+Punto 1:
+	i. Habria que sincronizar el metodo decremento, el value() no es necesario su synch.
+	ii. Increment esta sincronizado con la variable c, deberia de estarlo con this.
+	c) Diferencias: el metodo sincronizado no esta centrandose exactamente en la seccion critica mientras que el bloque solo sincronziaria esa seccion
+Punto 2:
+	a:
+	  Si sem2 se inicializa en 0, ningun proceso podrá funcionar, ya que todos los semaforos estaran ocupados, por ende los 4 procesos estarian bloqueados
+	b:
+	  Si el sem1 se inicializa en 1 no se puede asegurar la linealidad de la ejecucion y da a un indeterminismo.
+        
+Punto3:
+	P1{
+	    adquirir(sem1)
+		operaciones_P1
+		liberar(sem2)
+    }
+	P2{
+		adquirir(sem3)
+		operaciones_P2
+		liberar(p1)
+    }
+	P3{
+		adquirir(sem2)
+		operaciones_P3
+		liberar(sem3)
+    }
