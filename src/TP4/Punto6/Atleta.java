@@ -1,45 +1,27 @@
 package TP4.Punto6;
+
 import java.util.Random;
 
-public class Atleta implements Runnable{
+public class Atleta implements Runnable {
     private Carrera carrera;
-    private boolean primero;
+    private char lado;
 
-    Atleta(Carrera c , boolean primero){
+    Atleta(Carrera c, char l) {
         this.carrera = c;
-        this.primero = primero;
+        this.lado = l;
     }
 
     public void run() {
         Random r = new Random();
-        synchronized(Atleta.class){
-            if(primero){
-                correr();
-            }
-        }
-        if(!primero){
-            correr();
-        }
-        
-    }
-
-    
-    public void correr(){
-        Random r = new Random();
-        
-        try{
-            carrera.agarrar();
+        try {
+            carrera.correr(lado);
             long ini = System.currentTimeMillis();
-            Thread.sleep((r.nextInt(3) + 9)*100);
-
-            carrera.soltar();
+            Thread.sleep((r.nextInt(3) + 9) * 1000);
+            carrera.terminar(lado);
             long fin = System.currentTimeMillis();
-
-            System.out.println("El corredor "+Thread.currentThread().getName()+" finalizo en un tiempo de "+ (fin - ini));
-        }catch(Exception e){
-            System.out.println(Thread.currentThread().getName() + " se le atrancó el pati");
+            System.out.println(
+                    "El corredor " + Thread.currentThread().getName() + " finalizo en un tiempo de " + (fin - ini));
+        } catch (Exception e) {
         }
     }
-
-
 }
