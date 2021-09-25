@@ -12,11 +12,12 @@ public class Carrera {
                 testigo.release();
             }
         }while(posSiguienteTestigo != posActual);
-        System.out.println(Thread.currentThread().getName() + " agarró");
+        System.out.println("-> " + Thread.currentThread().getName() + " agarró el testigo.");
     }
 
     public void soltar(){
         testigo.release();
+        System.out.println(Thread.currentThread().getName() + " solto el testigo.");
         posSiguienteTestigo++;
     }
 }

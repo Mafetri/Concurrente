@@ -13,16 +13,14 @@ public class Atleta implements Runnable{
     
     public void run(){
         Random r = new Random();
-        long ini = System.currentTimeMillis();
-        
         
         try{
             carrera.correr(this.pos);
+            long ini = System.currentTimeMillis();
             Thread.sleep((r.nextInt(3) + 9)*100);
+            long total = System.currentTimeMillis() - ini;
             carrera.soltar();
-
-            System.out.println("El corredor " + Thread.currentThread().getName() + " tardó " + (System.currentTimeMillis() - ini));
+            System.out.println("El corredor " + Thread.currentThread().getName() + " tardó " + total + "ms.");
         }catch(InterruptedException e){}
-        
     }
 }
