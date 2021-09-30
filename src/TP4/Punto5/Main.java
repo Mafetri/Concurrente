@@ -15,7 +15,7 @@ public class Main {
         long startTime = System.nanoTime();
         */
         
-        for(int i=0; i<50; i++){
+        for(int i=0; i<5; i++){
             caracter = (char)(r.nextInt(3)+65);
             hilos[i] = new Thread(new Usuario("Te amo profe", caracter, centro));
             hilos[i].start();
