@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args){
-        CentroImpresion centro = new CentroImpresion(5,5);
+        CentroImpresion centro = new CentroImpresion(2,2);
         
         Random r = new Random();
         char caracter;
@@ -15,8 +15,8 @@ public class Main {
         long startTime = System.nanoTime();
         */
         
-        for(int i=0; i<500; i++){
-            caracter = (char)(r.nextInt(3)+67);
+        for(int i=0; i<50; i++){
+            caracter = (char)(r.nextInt(3)+65);
             hilos[i] = new Thread(new Usuario("Te amo profe", caracter, centro));
             hilos[i].start();
         }
