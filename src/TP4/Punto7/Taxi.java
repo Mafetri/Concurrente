@@ -15,6 +15,7 @@ public class Taxi {
         destino.acquire(); // VIAJANDO PA
     }
 
+    // TAXISTA
     public void dejarViajar() throws InterruptedException {
         taxiOcupado.release();
         destino.release();
