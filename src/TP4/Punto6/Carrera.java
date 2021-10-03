@@ -1,7 +1,6 @@
 package TP4.Punto6;
 
 import java.util.concurrent.*;
-import java.util.*;
 
 public class Carrera {
     private Semaphore ladoIzq = new Semaphore(1);

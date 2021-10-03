@@ -1,5 +1,4 @@
 package TP4.Punto4;
-import java.util.concurrent.*;
 
 public class Letra implements Runnable {
     private char letra;
