@@ -27,7 +27,5 @@ public class Carrera {
         }else{
             System.out.println("Terminó la carrera");
         }
-        
-        
     }
 }
