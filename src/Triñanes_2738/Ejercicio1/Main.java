@@ -2,7 +2,7 @@ package Triñanes_2738.Ejercicio1;
 
 public class Main{
     public static void main(String[] args){
-        // === CANTIDAD DE CLIENTES MODIFICABLES ===
+        // === CANTIDAD DE CLIENTES MODIFICABLE ===
         int cantClientes = 15;
 
         Toboganes t = new Toboganes();

@@ -15,7 +15,10 @@ public class Encargado implements Runnable {
                 System.out.println("El empleado está esperando a un cliente.");
                 toboganes.atender();
 
-                // Toma la decision de que tobogan debe usar el cliente chequeando cada 100ms
+                // Chequea  que tobogan se liberó para asignarselo al proximo cliente chequeando cada 100ms
+                // (es una espera activa, pero es la unica forma que encontré para que los clientes puedan
+                // usar el tobogan que se desocupe "primero" sin hacer fila en los toboganes sino que el
+                // empleado se los asigne cuando sepa cual fue el primero en liberarse)
                 System.out.println("El empleado está tomando una desicion.");
                 while(!toboganes.asignarTobogan()){
                     Thread.sleep(100);

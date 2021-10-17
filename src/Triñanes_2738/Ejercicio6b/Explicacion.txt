@@ -1,0 +1,5 @@
+Como los locks no pueden ser liberados por otros hilos, no se puede sincronizar que uno sea bloqueado y sea liberado por el anterior 
+para correr. Por lo tanto tuve que hacer una espera activa (linea 22 del Corredor) que el corredor chequee si es su turno de agarrar 
+el testigo, si no era su turno (linea 23 de Carrera)suelta el testigo para que el que debe agarrarlo, lo agarre y corra. 
+Esta solucion consume mucho tiempo de CPU ya que todos los corredores todo el tiempo estarán chequeando si es su turno agarrando y 
+soltando el lock.
