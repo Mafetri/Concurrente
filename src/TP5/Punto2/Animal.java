@@ -1,4 +1,4 @@
-package TP5.Punto1B;
+package TP5.Punto2;
 
 public class Animal implements Runnable{
     char tipo;
@@ -17,14 +17,9 @@ public class Animal implements Runnable{
             System.out.println(Thread.currentThread().getName() + " está esperando para comer.");
             comedor.comer(tipo);
             System.out.println(verde+Thread.currentThread().getName() + " está comiendo."+reset);
-            Thread.sleep(3000);
+            Thread.sleep(1000);
             System.out.println(Thread.currentThread().getName() + " terminó de comer.");
-            if(tipo == 'p'){
-                comedor.dejarDeComerPerros();
-            }else{
-                comedor.dejarDeComerGatos();
-            }
-            
+            comedor.dejarDeComer(tipo);
         }catch(Exception e){}
     }
 }

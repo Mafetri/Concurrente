@@ -1,4 +1,4 @@
-package TP5.Punto1B;
+package TP5.Punto2;
 
 public class Gestor implements Runnable{
     private Comedor comedor;
