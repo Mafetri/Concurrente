@@ -3,12 +3,11 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args){
-        int cantPlatos = 2, cantAnimales = 20, permisos = 5;
+        int cantPlatos = 3, cantAnimales = 20, permisos = 6;
 
-        Comedor comedor = new Comedor(cantPlatos);
-        Thread gestor = new Thread(new Gestor(comedor, permisos));
+        Comedor comedor = new Comedor(cantPlatos, permisos);
         Thread[] animales = new Thread[cantAnimales];
-        gestor.start();
+
         for(int i = 0; i < cantAnimales; i++){
             char tipo = random();
             animales[i] = new Thread(new Animal(tipo, comedor), "Animal tipo " + tipo+i);

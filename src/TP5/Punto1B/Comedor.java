@@ -28,17 +28,23 @@ public class Comedor {
     public synchronized void dejarDeComerPerros() throws InterruptedException{
         semComederos.release();
         comidos++;
-        if(semComederos.availablePermits() == cantComederos && comidos >= turnos){
+        if(semComederos.availablePermits() == cantComederos && (comidos >= turnos || !colaPerros.hasQueuedThreads())){
             colaGatos.release(turnos);
             comidos = 0;
+            if(!colaGatos.hasQueuedThreads()){
+                colaPerros.release(colaPerros.getQueueLength());
+            }
         }
     }
     public synchronized void dejarDeComerGatos() throws InterruptedException{
         semComederos.release();
         comidos++;
-        if(semComederos.availablePermits() == cantComederos && comidos >= turnos){
+        if(semComederos.availablePermits() == cantComederos && (comidos >= turnos || !colaGatos.hasQueuedThreads())){
             colaPerros.release(turnos);
             comidos = 0;
+            if(!colaPerros.hasQueuedThreads()){
+                colaGatos.release(colaGatos.getQueueLength());
+            }
         }
     }
 }

@@ -19,7 +19,12 @@ public class Animal implements Runnable{
             System.out.println(verde+Thread.currentThread().getName() + " está comiendo."+reset);
             Thread.sleep(1000);
             System.out.println(Thread.currentThread().getName() + " terminó de comer.");
-            comedor.dejarDeComer(tipo);
+            if(tipo == 'p'){
+                comedor.dejarDeComerPerros();
+            }else{
+                comedor.dejarDeComerGatos();
+            }
+            
         }catch(Exception e){}
     }
 }

@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args){
-        int cantPlatos = 2, cantAnimales = 20, permisos = 5;
+        int cantPlatos = 2, cantAnimales = 20, permisos = 3;
 
         Comedor comedor = new Comedor(cantPlatos, permisos);
         Thread[] animales = new Thread[cantAnimales];

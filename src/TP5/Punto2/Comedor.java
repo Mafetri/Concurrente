@@ -4,45 +4,48 @@ import java.util.concurrent.*;
 public class Comedor {
     private Semaphore semComederos;
     private Semaphore colaGatos = new Semaphore(0);
-    private Semaphore colaPerros = new Semaphore(0);
-    private Semaphore esperarVaciamiento = new Semaphore(0);
-    private int cantEsperando;
+    private Semaphore colaPerros;
     private int comidos = 0;
+    private int turnos;
+    private int cantComederos;
 
-    public Comedor(int cantMax){
-        semComederos = new Semaphore(cantMax);
+    public Comedor(int cantMax, int turnos){
+        cantComederos = cantMax;
+        semComederos = new Semaphore(cantComederos);
+        this.turnos = turnos;
+        colaPerros = new Semaphore(turnos);
     }
 
     public void comer(char tipo) throws InterruptedException{
         if(tipo == 'p'){
             colaPerros.acquire();
+            semComederos.acquire(2);
         }else{
             colaGatos.acquire();
+            semComederos.acquire();
         } 
-        cantEsperando++;
-        semComederos.acquire();
     }
 
-    public void dejarDeComer(char tipo) throws InterruptedException{
-        semComederos.release();
+    public synchronized void dejarDeComerPerros() throws InterruptedException{
+        semComederos.release(2);
         comidos++;
-        if(comidos == cantEsperando){
-            esperarVaciamiento.release(1);
+        if(semComederos.availablePermits() == cantComederos && (comidos >= turnos || !colaPerros.hasQueuedThreads())){
+            colaGatos.release(turnos);
+            comidos = 0;
+            if(!colaGatos.hasQueuedThreads()){
+                colaPerros.release(colaPerros.getQueueLength());
+            }
         }
     }
-
-    // ===== Gestor ====
-    public void comerPerros(int permisos){
-        comidos = 0;
-        cantEsperando = 0;
-        colaPerros.release(permisos/2);
-    }
-    public void esperarVaciamiento() throws InterruptedException{
-        esperarVaciamiento.acquire();
-    }
-    public void comerGatos(int permisos){
-        comidos = 0;
-        cantEsperando = 0;
-        colaGatos.release(permisos);
+    public synchronized void dejarDeComerGatos() throws InterruptedException{
+        semComederos.release();
+        comidos++;
+        if(semComederos.availablePermits() == cantComederos && (comidos >= turnos || !colaGatos.hasQueuedThreads())){
+            colaPerros.release(turnos);
+            comidos = 0;
+            if(!colaPerros.hasQueuedThreads()){
+                colaGatos.release(colaGatos.getQueueLength());
+            }
+        }
     }
 }
