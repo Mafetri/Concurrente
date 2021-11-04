@@ -1,10 +1,10 @@
 package TP6.Punto8;
-import java.util.concurrent.*;
-import java.util.concurrent.locks.*;
 
 public class Centro {
     private int revistas;
     private int camillas;
+    private int turnoActual = 0;
+    private int turnoFinal = 0;
 
     public Centro (int revistas, int camillas){
         this.revistas = revistas;
@@ -13,7 +13,9 @@ public class Centro {
 
     public synchronized void entrarSala() throws InterruptedException{
         boolean tieneRevista = false;
-        while(camillas <= 0){
+        int turno = turnoFinal;
+        turnoFinal++;
+        while(camillas <= 0 || turno != turnoActual){
             if(!tieneRevista && revistas > 0){
                 tieneRevista = true;
                 revistas--;
@@ -26,7 +28,9 @@ public class Centro {
         if(tieneRevista){
             revistas++;
         }
+        turnoActual++;
         camillas--;
+        notifyAll();
     }
 
     public synchronized void irse(){

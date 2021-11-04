@@ -10,7 +10,7 @@ public class Donador implements Runnable{
             System.out.println("El " + Thread.currentThread().getName() + " llegó al centro.");
             c.entrarSala();
             System.out.println("El " + Thread.currentThread().getName() + " se está sacando sangre. 🩸🩸");
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             c.irse();
         }catch(Exception e){}
     }
