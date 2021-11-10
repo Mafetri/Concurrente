@@ -2,9 +2,15 @@ package TP6.Punto7;
 
 public class Main {
     public static void main(String[] args){
-        Pasteleria p = new Pasteleria(50, 10, 5, 10, 15);
+        int pesoMax = 35;
+        int cantEmpaquetadores = 2;
+        int tamMostrador = 10;
+        int pesoA = 5;
+        int pesoB = 10;
+        int pesoC = 15;
+        Pasteleria p = new Pasteleria(pesoMax, tamMostrador, pesoA, pesoB, pesoC, cantEmpaquetadores);
         Thread[] hornos = new Thread[3];
-        Thread[] empaquetador = new Thread[2];
+        Thread[] empaquetador = new Thread[cantEmpaquetadores];
         Thread brazo = new Thread(new Brazo(p), "Brazo 1");
 
         brazo.start();

@@ -1,11 +1,13 @@
 package TP6.Punto7;
 
-import java.util.concurrent.*;
 import java.util.Queue;
 import java.util.concurrent.locks.*;
 import java.util.LinkedList;
+import java.util.*;
 
 public class Pasteleria {
+    private int cantEmpaquetadores;
+    private int cantidadChequeados;
     private int pesoCajaMax;
     private int tamañoMostrador;
     private int pesoA;
@@ -17,13 +19,14 @@ public class Pasteleria {
     private Condition hayLugarMostrador = mutex.newCondition(), hayTortas = mutex.newCondition(),
             hayLugarCaja = mutex.newCondition(), hayCajaParaRetirar = mutex.newCondition();
 
-    public Pasteleria(int pesoMax, int tamañoMostrador, int pesoA, int pesoB, int pesoC) {
+    public Pasteleria(int pesoMax, int tamañoMostrador, int pesoA, int pesoB, int pesoC, int cantEmpaquetadores) {
         this.pesoCajaMax = pesoMax;
         this.tamañoMostrador = tamañoMostrador;
         this.pesoA = pesoA;
         this.pesoB = pesoB;
         this.pesoC = pesoC;
-        mostrador = new LinkedList();
+        mostrador = new LinkedList<Character>();
+        this.cantEmpaquetadores = cantEmpaquetadores;
     }
 
     // ==== Horno ====
@@ -73,9 +76,17 @@ public class Pasteleria {
     }
     public void soltarTorta(int peso) throws InterruptedException{
         mutex.lock();
+        boolean yaChequee = false;
         try{
             while(pesoCajaActual + peso > pesoCajaMax){
-                hayCajaParaRetirar.signal();
+                if(cantidadChequeados >= cantEmpaquetadores){
+                    cantidadChequeados = 0;
+                    hayCajaParaRetirar.signal();
+                }else if (!yaChequee){
+                    cantidadChequeados++;
+                    yaChequee = true;
+                    hayLugarCaja.signal();
+                }
                 hayLugarCaja.await();
             }
             pesoCajaActual = pesoCajaActual + peso;
