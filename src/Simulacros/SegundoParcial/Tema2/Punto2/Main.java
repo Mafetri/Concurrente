@@ -1,4 +1,4 @@
-package Simulacro2do.Tema2.Punto2;
+package Simulacros.SegundoParcial.Tema2.Punto2;
 
 public class Main {
     public static void main(String[] args){
