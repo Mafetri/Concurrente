@@ -1,4 +1,4 @@
-package ActividadObligatoria3.Punto1;
+package ActividadesObligatorias.ActividadObligatoria3.Punto1;
 
 public class Ensamblador implements Runnable{
 

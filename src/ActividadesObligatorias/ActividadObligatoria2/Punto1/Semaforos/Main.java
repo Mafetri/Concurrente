@@ -1,4 +1,4 @@
-package ActividadObligatoria2.Punto1.Joins;
+package ActividadesObligatorias.ActividadObligatoria2.Punto1.Semaforos;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,11 +12,9 @@ public class Main {
         t1.start();
         t2.start();
         try {
-            t1.join();
-            t2.join();
+            c.s3();
         } catch (Exception e) {
         }
-        c.s3();
         System.out.println(c.s4());
     }
 }

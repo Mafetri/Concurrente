@@ -1,4 +1,4 @@
-package ActividadObligatoria2.Punto2.Semaforos;
+package ActividadesObligatorias.ActividadObligatoria2.Punto2.Semaforos;
 
 public class Main {
     public static void main(String[] args){

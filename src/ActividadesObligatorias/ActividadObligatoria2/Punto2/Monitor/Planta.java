@@ -1,4 +1,4 @@
-package ActividadObligatoria2.Punto2.Monitor;
+package ActividadesObligatorias.ActividadObligatoria2.Punto2.Monitor;
 
 public class Planta {
     public synchronized void embotellar() throws InterruptedException {

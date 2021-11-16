@@ -1,4 +1,4 @@
-package ActividadObligatoria2.Punto1.Joins;
+package ActividadesObligatorias.ActividadObligatoria2.Punto1.Joins;
 
 public class Hilo implements Runnable{
     private Compartido c;

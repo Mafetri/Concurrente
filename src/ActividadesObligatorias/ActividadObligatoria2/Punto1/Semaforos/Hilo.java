@@ -1,4 +1,4 @@
-package ActividadObligatoria2.Punto1.Semaforos;
+package ActividadesObligatorias.ActividadObligatoria2.Punto1.Semaforos;
 
 public class Hilo implements Runnable{
     private Compartido c;

@@ -1,4 +1,4 @@
-package ActividadObligatoria3.Punto1;
+package ActividadesObligatorias.ActividadObligatoria3.Punto1;
 
 import java.util.concurrent.locks.*;
 import java.util.*;

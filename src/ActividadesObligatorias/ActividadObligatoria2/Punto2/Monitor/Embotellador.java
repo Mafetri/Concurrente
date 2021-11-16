@@ -1,4 +1,4 @@
-package ActividadObligatoria2.Punto2.Monitor;
+package ActividadesObligatorias.ActividadObligatoria2.Punto2.Monitor;
 
 public class Embotellador implements Runnable{
     private Planta p;
