@@ -8,9 +8,7 @@ public class Manguero implements Runnable{
     public void run(){
         try{
             while(true){
-                while(!s.hacerManga()){
-                    System.out.println("El cesto de mangas está lleno");
-                }
+                s.hacerManga();
                 Thread.sleep(500);
                 System.out.println(Thread.currentThread().getName() + " entregó una manga");
                 s.meterMangaCesto();

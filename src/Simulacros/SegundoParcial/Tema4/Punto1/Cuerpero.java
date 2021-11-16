@@ -12,9 +12,7 @@ public class Cuerpero implements Runnable{
         
         try{
             while(true){
-                while(!suetereria.hacerCuerpo()){
-                    System.out.println("No puede hacer cuerpo");
-                }
+                suetereria.hacerCuerpo();
                 Thread.sleep(1000);
                 System.out.println("El cuerpero metio un cuerpo al cesto");
                 suetereria.meterCuerpoCesto();

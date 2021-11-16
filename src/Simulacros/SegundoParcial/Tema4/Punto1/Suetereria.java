@@ -7,8 +7,6 @@ public class Suetereria {
     private Semaphore mangasHechas  = new Semaphore(0);
     private int numMaxMangas;
     private int numMaxCuerpos;
-    private int cantidadMangasActual;
-    private int cantidadCuerposActuales;
     private int cajaSueteresMax;
     private int tandaSueteres = 0;
     
@@ -16,37 +14,23 @@ public class Suetereria {
         numMaxMangas = numMangas;
         numMaxCuerpos = numCuerpos;
         this.cajaSueteresMax = cajaSueteresMax;
-        hacerManga = new Semaphore(0);
-        hacerCuerpo = new Semaphore(0);
+        hacerManga = new Semaphore(numMaxMangas);
+        hacerCuerpo = new Semaphore(numMaxCuerpos);
     }
 
     // ==== Manguero ====
-    public boolean hacerManga() throws InterruptedException{
-        boolean hagoManga = false;
-        if(cantidadMangasActual < numMaxMangas){
-            hagoManga = true;
-            cantidadMangasActual++;
-            System.out.println("🧪" + cantidadMangasActual);
-        }else{
-            hacerManga.acquire();
-        }
-        return hagoManga;
+    public void hacerManga() throws InterruptedException{
+        hacerManga.acquire();
+        System.out.println("🧪  -> " + hacerManga.availablePermits());
     }
     public void meterMangaCesto() throws InterruptedException{
         mangasHechas.release();
     }
     
-    
-    public boolean hacerCuerpo() throws InterruptedException{
-        boolean hagoCuerpo = false;
-        if(cantidadCuerposActuales < numMaxCuerpos){
-            hagoCuerpo = true;
-            cantidadCuerposActuales++;
-            System.out.println("👄   " + cantidadCuerposActuales);
-        }else{
-            hacerCuerpo.acquire();
-        }
-        return hagoCuerpo;
+    // ==== Cuerperos ====
+    public void hacerCuerpo() throws InterruptedException{
+        hacerCuerpo.acquire();
+        System.out.println("👄  -> " + hacerCuerpo.availablePermits());
     }
     public void meterCuerpoCesto() throws InterruptedException{
         cuerposHechos.release();
@@ -55,15 +39,9 @@ public class Suetereria {
     // ==== Ensamblador ====
     public void esperarMateriales() throws InterruptedException{
         mangasHechas.acquire(2);
+        hacerManga.release(2);
         cuerposHechos.acquire();
-        cantidadMangasActual -= 2;
-        cantidadCuerposActuales--;
-        if(cantidadMangasActual+2 == numMaxMangas){
-            hacerManga.release();
-        }
-        if(cantidadCuerposActuales+1 == numMaxCuerpos){
-            hacerCuerpo.release();
-        }
+        hacerCuerpo.release();
     }
     public boolean entregarSueter(){
         tandaSueteres++;
